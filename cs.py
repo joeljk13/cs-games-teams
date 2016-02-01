@@ -43,6 +43,14 @@ def main():
         'rev': ["CW", "JK", "CP", "DR"],
         'comp': ["MK", "MJ", "JB", "AC"]
     }
+    for person in people:
+        s = ""
+        c = 0
+        for x in comps.keys():
+            if person in comps[x]:
+                s += " " + x
+                c += 1
+        print person + " " + str(c + (person in comps['ai'])) + s
     def test_team(team1):
         team2 = list(set(range(20)) - set(team1))
         team1 = map(lambda x: people[x], team1)
@@ -58,8 +66,9 @@ def main():
         return team1, team2, conflicts, cp
     L = map(lambda x:
         test_team(x), itertools.combinations(range(20), 10))
+    L = filter(lambda x: people[0] in x[0], L)
     L.sort(key=lambda x: x[2])
-    pprint(L[:10])
+    pprint(list(itertools.takewhile(lambda x: x[2] <= 1, L)))
 
 if __name__ == "__main__":
     main()
