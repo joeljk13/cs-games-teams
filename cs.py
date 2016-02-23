@@ -33,15 +33,15 @@ def main():
         'ai': ["MK", "JJ", "AS", "HT", "GM", "NC"],
         'web': ["DH", "JD", "ZP", "CW"],
         'os': ["AC", "JK", "JB", "CP"],
-        'relay': ["ZP", "JB", "HT", "JJ", "DH", "NB"],
-        'parallel': ["CP", "JK", "JA", "NC"],
+        'relay': ["ZP", "HT", "JJ", "NB", "AC", "MJ"],
+        'parallel': ["CP", "JK", "JA", "JB"],
         'theory': ["AS", "LK", "DR", "SM"],
-        'debug': ["DH", "GM", "CP", "JK"],
-        'soft': ["MK", "JA", "NB", "SM"],
-        'db': ["MJ", "HT", "AC", "LK"],
+        'debug': ["GM", "CP", "JK", "DR"],
+        'soft': ["MK", "JA", "SM", "JJ"], # maybe MK instead of JJ
+        'mobile': ["NB", "CW", "DH", "NC"],
         'sg': ["AS", "CW", "JD", "NC"],
         'rev': ["CW", "JK", "CP", "DR"],
-        'comp': ["MK", "MJ", "JB", "AC"]
+        'comp': ["MJ", "JB", "AC", "LK"]
     }
     for person in people:
         s = ""
@@ -69,6 +69,5 @@ def main():
     L = filter(lambda x: people[0] in x[0], L)
     L.sort(key=lambda x: x[2])
     pprint(list(itertools.takewhile(lambda x: x[2] <= 1, L)))
-
 if __name__ == "__main__":
     main()
