@@ -58,17 +58,24 @@ done <OUTPUT >RAW_DATA
 
 awk '$5 == "1" && $4 != "ALL"' RAW_DATA >DATA
 
-echo Team 0: $(awk '$3 == "0" {print $2}' DATA | sort -u)
-
-echo Team 1: $(awk '$3 == "1" {print $2}' DATA | sort -u)
+echo Team 0: $(awk '$3 == "0" {print $2}' DATA | sort -u) >INFO
+echo >>INFO
+echo Team 1: $(awk '$3 == "1" {print $2}' DATA | sort -u) >>INFO
+echo >>INFO
 
 for p in ${=PEOPLE}; do
     echo $p: $(awk "\$2 == \"$p\" {print \$4}" DATA | sort -u)
-done
+done >>INFO
+echo >>INFO
 
 for cat in ${=CATS}; do
+    if [ $cat = ALL ]; then
+        continue
+    fi
     echo $cat:
     awk '$4 == "'$cat'" {printf "(%s) %s\n", $3, $2}' DATA | sort -u
-done
+done >>INFO
 
 echo $count
+
+cat INFO
