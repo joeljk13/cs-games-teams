@@ -1,0 +1,45 @@
+#!/usr/bin/env zsh
+
+set -e
+
+NUM_PEOPLE=20
+NUM_CATS=12
+
+PEOPLE="Antonio Ben Brandon Colin Dan Gayeon Grace Hassler Jack Jackson Jacob Joel Johnny Lia Maria Mikayla Nathan Ned Shir Zach"
+
+CATS="ai relay SE extreme theory sport gaming RE security OS Mystery ALL"
+
+NUM_PEOPLE=$(echo $PEOPLE | wc -w)
+NUM_CATS=$(echo $CATS | wc -w)
+
+num_to_ptc()
+{
+    num=$(($1 - 1))
+    cat=$(($num % $NUM_CATS))
+    num=$(($num / $NUM_CATS))
+    team=$(($num % 2))
+    num=$(($num / 2))
+    person=$num
+
+    # echo x${person}_${team}_${cat}
+    echo $PEOPLE | cut -d " " -f $(($person + 1))
+    echo $team
+    echo $CATS | cut -d " " -f $(($cat + 1))
+}
+
+./cs.py >INPUT
+glpsol --lp -w OUTPUT INPUT
+
+count=0
+while read c var value; do
+    if [ $c != j ]; then
+        continue
+    fi
+
+    echo $var $(num_to_ptc $var) $value
+    if [ $value = 1 ]; then
+        count=$(($count + 1))
+    fi
+done <OUTPUT
+
+echo $count
