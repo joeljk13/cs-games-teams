@@ -7,7 +7,7 @@ NUM_CATS=12
 
 PEOPLE="Antonio Ben Brandon Colin Dan Gayeon Grace Hassler Jack Jackson Jacob Joel Johnny Lia Maria Mikayla Nathan Ned Shir Zach"
 
-CATS="ai relay SE extreme theory sport gaming RE security OS Mystery ALL"
+CATS="ai relay SE extreme theory sport gaming RE security OS mystery ALL"
 
 NUM_PEOPLE=$(echo $PEOPLE | wc -w)
 NUM_CATS=$(echo $CATS | wc -w)
@@ -22,13 +22,14 @@ num_to_ptc()
     person=$num
 
     # echo x${person}_${team}_${cat}
-    echo $PEOPLE | cut -d " " -f $(($person + 1))
-    echo $team
-    echo $CATS | cut -d " " -f $(($cat + 1))
+    out="$(echo $PEOPLE | cut -d " " -f $(($person + 1))) $team "
+    out="$out $(echo $CATS | cut -d " " -f $(($cat + 1)))"
+    echo $out
 }
 
 ./cs.py >INPUT
-glpsol --lp -w OUTPUT INPUT
+./mps.py <INPUT >MPS
+glpsol -w OUTPUT MPS
 
 count=0
 while read c var value; do
@@ -36,10 +37,38 @@ while read c var value; do
         continue
     fi
 
-    echo $var $(num_to_ptc $var) $value
+    num_to_ptc $var | read person team cat
+
+    echo $var $person $team $cat $value
+
+    if [ $team = 0 ]; then
+        if ! grep -q $person <<<$team0; then
+            team0+="$person "
+        fi
+    else
+        if ! grep -q $person <<<$team1; then
+            team1+="$person "
+        fi
+    fi
+
     if [ $value = 1 ]; then
         count=$(($count + 1))
     fi
-done <OUTPUT
+done <OUTPUT >RAW_DATA
+
+awk '$5 == "1" && $4 != "ALL"' RAW_DATA >DATA
+
+echo Team 0: $(awk '$3 == "0" {print $2}' DATA | sort -u)
+
+echo Team 1: $(awk '$3 == "1" {print $2}' DATA | sort -u)
+
+for p in ${=PEOPLE}; do
+    echo $p: $(awk "\$2 == \"$p\" {print \$4}" DATA | sort -u)
+done
+
+for cat in ${=CATS}; do
+    echo $cat:
+    awk '$4 == "'$cat'" {printf "(%s) %s\n", $3, $2}' DATA | sort -u
+done
 
 echo $count
