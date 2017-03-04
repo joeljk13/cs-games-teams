@@ -6,43 +6,43 @@ import itertools
 
 def main():
     people = [
-        "JK",
-        "CW",
-        "JA",
-        "MJ",
-        "DR",
-        "ZP",
-        "NB",
-        "DH",
-        "SM",
-        "MK",
-        "JJ",
-        "AS",
-        "HT",
-        "GM",
-        "NC",
-        "CP",
-        "AC",
-        "JD",
-        "LK",
-        "JB"
+        "Antonio",
+        "Ben",
+        "Brandon",
+        "Colin",
+        "Dan",
+        "Gayeon",
+        "Grace",
+        "Hassler",
+        "Jack",
+        "Jackson",
+        "Jacob",
+        "Joel",
+        "Johnny",
+        "Lia",
+        "Maria",
+        "Mikayla",
+        "Nathan",
+        "Ned",
+        "Shir",
+        "Zach"
     ]
 
     comps = {
-        'alg': ["JA", "DR", "MJ", "ZP"],
-        'extreme': ["NB", "DH", "LK", "SM"],
-        'ai': ["MK", "JJ", "AS", "HT", "GM", "NC"],
-        'web': ["DH", "JD", "ZP", "CW"],
-        'os': ["AC", "JK", "JB", "CP"],
-        'relay': ["ZP", "HT", "JJ", "NB", "AC", "MJ"],
-        'parallel': ["CP", "JK", "JA", "JB"],
-        'theory': ["AS", "LK", "DR", "SM"],
-        'debug': ["GM", "CP", "JK", "DR"],
-        'soft': ["MK", "JA", "SM", "JJ"],
-        'mobile': ["NB", "CW", "DH", "NC"],
-        # 'sg': ["AS", "CW", "JD", "NC"],
-        'rev': ["CW", "JK", "CP", "DR"],
-        'comp': ["MJ", "JB", "AC", "LK"]
+        'AI': ['Nathan', 'Antonio', 'Brandon', 'Hassler', 'Shir', 'Jack'],
+        'RE': ['Grace', 'Colin', 'Joel', 'Dan'],
+        'SE': ['Johnny', 'Gayeon', 'Zach', 'Maria', 'Lia', 'Jackson'],
+        'CSEC': ['Jacob', 'Dan', 'Colin', 'Grace'],
+        'Extreme': ['Mikayla', 'Zach', 'Gayeon', 'Lia'],
+        'Relay': ['Hassler', 'Jack', 'Zach', 'Johnny', 'Ben', 'Ned'],
+        'Security': ['Grace', 'Colin', 'Dan', 'Antonio'],
+        'Theoretical': ['Shir', 'Jackson', 'Maria', 'Mikayla'],
+        'Sport': ['Maria', 'Grace', 'Johnny', 'Hassler'],
+        'Web': ['Brandon', 'Gayeon', 'Nathan', 'Jack'],
+        'OS': ['Jacob', 'Joel', 'Ned', 'Ben'],
+        'Debugging': ['Joel', 'Ben', 'Jack', 'Ned'],
+        'Mobile': ['Lia', 'Mikayla', 'Gayeon', 'Nathan'],
+        'Gaming': ['Jacob', 'Colin', 'Johnny', 'Jackson']
     }
 
     for person in people:
@@ -52,7 +52,7 @@ def main():
             if person in comps[x]:
                 s += " " + x
                 c += 1
-        print person + " " + str(c + (person in comps['ai'])) + s
+        print person + " " + str(c + (person in comps['AI'])) + s
 
     def test_team(team1):
         team2 = list(set(range(20)) - set(team1))
