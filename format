@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo "["
+awk "
+{
+    printf \"{'name': '%s', 'ai': %d, 'RE': %d, 'SE': %d, 'CSEC': %d, 'extreme': %d, 'relay': %d, 'security': %d, 'theory': %d, 'sport': %d, 'web': %d, 'os': %d, 'debugging': %d, 'mobile': %d, 'gaming': %d, 'mystery': %d, 'ALL': 0},\n\",
+    \$1, \$2, \$3, \$4, \$5, \$6, \$7, \$8, \$8, \$9, \$10, \$11, \$12, \$13,
+    \$14, \$15
+}
+" SPREADSHEET
+echo "]"

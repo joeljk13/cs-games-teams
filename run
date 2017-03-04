@@ -7,7 +7,7 @@ NUM_CATS=12
 
 PEOPLE="Antonio Ben Brandon Colin Dan Gayeon Grace Hassler Jack Jackson Jacob Joel Johnny Lia Maria Mikayla Nathan Ned Shir Zach"
 
-CATS="ai relay SE extreme theory sport gaming RE security OS mystery ALL"
+CATS="ai RE SE CSEC extreme relay security theory sport web os debugging mobile gaming mystery ALL"
 
 NUM_PEOPLE=$(echo $PEOPLE | wc -w)
 NUM_CATS=$(echo $CATS | wc -w)
