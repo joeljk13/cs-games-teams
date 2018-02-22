@@ -3,11 +3,11 @@
 set -e
 
 NUM_PEOPLE=20
-NUM_CATS=12
+NUM_CATS=15
 
-PEOPLE="Antonio Ben Brandon Colin Dan Gayeon Grace Hassler Jack Jackson Jacob Joel Johnny Lia Maria Mikayla Nathan Ned Shir Zach"
+PEOPLE="Jackson Gianna Ben Brandon Alan Nathan Daniel Colin Shir Xiaoya Shengbo Will Shuyang Pandrew Jason Yutong Yujie Zach Michaela Joel"
 
-CATS="ai RE SE CSEC extreme relay security theory sport web os debugging mobile gaming mystery ALL"
+CATS="os embedded relay sport ai functional ml security swe theory mirego bell olympus cse-cts ALL"
 
 NUM_PEOPLE=$(echo $PEOPLE | wc -w)
 NUM_CATS=$(echo $CATS | wc -w)
