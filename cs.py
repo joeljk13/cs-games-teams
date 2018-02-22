@@ -4,6 +4,9 @@
 # import pprint
 # import itertools
 
+import math
+import sys
+
 PEOPLE = [
 {'name': 'Jackson', 'os': 13, 'embedded': 9, 'relay': 5, 'sport': 7, 'ai': 6, 'functional': 10, 'ml': 8, 'security': 15, 'swe': 3, 'theory': 1, 'mirego': 12, 'bell': 11, 'olympus': 4, 'cse-cts': 2, 'ALL': 0},
 {'name': 'Gianna', 'os': 8, 'embedded': 9, 'relay': 12, 'sport': 1, 'ai': 7, 'functional': 14, 'ml': 6, 'security': 13, 'swe': 2, 'theory': 3, 'mirego': 10, 'bell': 4, 'olympus': 5, 'cse-cts': 11, 'ALL': 0},
@@ -143,9 +146,14 @@ def str_eq(eq, rel, rhs):
     return ' '.join(map(str, eq)) + " " + rel + " " + str(rhs) + "\n"
 
 def get_weight(w):
-    return w * w
+    if w >= 9:
+        return -1
+    return int(w ** (1.0 / 2) * 100)
 
 def main():
+    for w in range(1, 16):
+        print(w, get_weight(w), file=sys.stderr)
+
     vars = []
     for p in range(N_PEOPLE):
         L1 = []
