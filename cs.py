@@ -109,7 +109,7 @@ N_PEOPLE = len(PEOPLE)
 N_CATEGORIES = len(CATEGORIES)
 N_TEAMS = 2
 
-MIN_CATS = 2
+MIN_CATS = 3
 
 # ILP Formation
 #
@@ -214,13 +214,14 @@ def main():
             for c2 in range(N_CATEGORIES):
                 if c1 == c2:
                     continue
-                cont = False
+                overlap = False
                 for a in CATEGORIES[c1]['time']:
                     for b in CATEGORIES[c2]['time']:
                         if a == b:
-                            cont = True
+                            overlap = True
+                            break
 
-                if cont:
+                if not overlap:
                     continue
 
                 eq = [0] * N_VARS
