@@ -30,6 +30,14 @@ PEOPLE = [
 {'name': 'Joel', 'os': 3, 'embedded': 2, 'relay': 4, 'sport': 10, 'ai': 5, 'functional': 1, 'ml': 10, 'security': 3, 'swe': 14, 'theory': 6, 'mirego': 14, 'bell': 14, 'olympus': 3, 'cse-cts': 5, 'ALL': 0},
 ]
 
+# name: name of category
+# people: number of people competing
+# time: list of time slots it takes up (to make sure people aren't in 2 places
+# at once or something)
+#
+# ALL is a special case category that contains all people; this is needed to
+# make sure there are exactly 10 people on each team. It uses time slot 0 so
+# that it doesn't conflict with any other time slots.
 CATEGORIES = [
     {
         'name': 'os',
@@ -112,7 +120,9 @@ N_PEOPLE = len(PEOPLE)
 N_CATEGORIES = len(CATEGORIES)
 N_TEAMS = 2
 
+# Minimum and maximum number of categories for a person to be in
 MIN_CATS = 3
+MAX_CATS = 5
 
 # ILP Formation
 #
@@ -145,14 +155,28 @@ def get_var(person, team, cat):
 def str_eq(eq, rel, rhs):
     return ' '.join(map(str, eq)) + " " + rel + " " + str(rhs) + "\n"
 
+# Given a person's preference (some possitive number, lower means something
+# they prefer), gets the ILP weight for the objective function associated with
+# that person/category. The ILP does a minimization, so larger weights mean the
+# person is less likely to be put in that category. If this returns a weight <
+# 0, then the ILP considers using that person/timeslot impossible.
+#
+# I usually experiment around with this and look at the results to see what
+# seems to work best. The early "if w >= N: return -1" will prevent people from
+# getting getting bad choices at the expense of others getting more first
+# choices.
+#
+# e.g. doing w**x will prioritize moving people from choice 2 to choice 1 over
+# choice 4 to choice 3, if x < 1
 def get_weight(w):
-    if w >= 9:
+    if w >= 10:
         return -1
-    return int(w ** (1.0 / 2) * 100)
+    # return int(math.log(w) * 100)
+    return int(w ** (1.0 / 4) * 100)
 
 def main():
     for w in range(1, 16):
-        print(w, get_weight(w), file=sys.stderr)
+        print("preference:", w, "weight:", get_weight(w), file=sys.stderr)
 
     vars = []
     for p in range(N_PEOPLE):
@@ -200,12 +224,19 @@ def main():
                 s += str_eq(eq, "L", 1)
 
     # For each p: SUM_{c} x_{p, 0, c} + x_{p, 1, c} >= MIN_CATS
+    # and SUM_{c} x_{p, 0, c} + x_{p, 1, c} <= MAX_CATS
     for p in range(N_PEOPLE):
         eq = [0] * N_VARS
         for c in range(N_CATEGORIES):
             eq[get_var(p, 0, c)] = len(CATEGORIES[c]['time'])
             eq[get_var(p, 1, c)] = len(CATEGORIES[c]['time'])
         s += str_eq(eq, "G", MIN_CATS)
+
+        eq = [0] * N_VARS
+        for c in range(N_CATEGORIES):
+            eq[get_var(p, 0, c)] = len(CATEGORIES[c]['time'])
+            eq[get_var(p, 1, c)] = len(CATEGORIES[c]['time'])
+        s += str_eq(eq, "L", MAX_CATS)
 
     # For each c, t: SUM_{p} x_{p, t, c} = people_{c}
     for c in range(N_CATEGORIES):

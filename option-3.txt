@@ -1,0 +1,99 @@
+Team 0: Brandon Colin Daniel Gianna Shuyang Will Xiaoya Yujie Yutong Zach
+
+Team 1: Alan Ben Jackson Jason Joel Michaela Nathan Pandrew Shengbo Shir
+
+Jackson: cse-cts theory
+Gianna: os sport swe
+Ben: bell ml relay sport
+Brandon: ai functional relay
+Alan: ai os
+Nathan: mirego security swe
+Daniel: sport swe
+Colin: cse-cts functional security
+Shir: cse-cts embedded theory
+Xiaoya: ai mirego relay
+Shengbo: mirego os swe
+Will: embedded relay theory
+Shuyang: bell embedded olympus security
+Pandrew: ai embedded ml
+Jason: functional olympus swe
+Yutong: bell mirego ml
+Yujie: ml swe theory
+Zach: cse-cts olympus os
+Michaela: bell relay sport
+Joel: functional olympus relay security
+
+os:
+(0) Gianna
+(0) Zach
+(1) Alan
+(1) Shengbo
+embedded:
+(0) Shuyang
+(0) Will
+(1) Pandrew
+(1) Shir
+relay:
+(0) Brandon
+(0) Will
+(0) Xiaoya
+(1) Ben
+(1) Joel
+(1) Michaela
+sport:
+(0) Daniel
+(0) Gianna
+(1) Ben
+(1) Michaela
+ai:
+(0) Brandon
+(0) Xiaoya
+(1) Alan
+(1) Pandrew
+functional:
+(0) Brandon
+(0) Colin
+(1) Jason
+(1) Joel
+ml:
+(0) Yujie
+(0) Yutong
+(1) Ben
+(1) Pandrew
+security:
+(0) Colin
+(0) Shuyang
+(1) Joel
+(1) Nathan
+swe:
+(0) Daniel
+(0) Gianna
+(0) Yujie
+(1) Jason
+(1) Nathan
+(1) Shengbo
+theory:
+(0) Will
+(0) Yujie
+(1) Jackson
+(1) Shir
+mirego:
+(0) Xiaoya
+(0) Yutong
+(1) Nathan
+(1) Shengbo
+bell:
+(0) Shuyang
+(0) Yutong
+(1) Ben
+(1) Michaela
+olympus:
+(0) Shuyang
+(0) Zach
+(1) Jason
+(1) Joel
+cse-cts:
+(0) Colin
+(0) Zach
+(1) Jackson
+(1) Shir
