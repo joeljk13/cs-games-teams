@@ -3,11 +3,11 @@
 ## Dependencies
 
 - zsh
-- glpsol (the actual ILP solver)
+- glpsol from GLPK (the actual ILP solver)
   - Likely any ILA solver that can read MPS format should work, although you
     may need to modify ./run to handle other output formats then
-  - I know this is in the arch linux repositories; other linux distributions
-    will probably have it too
+  - I know this is in the arch linux repositories in the glpk package; other
+    linux distributions will probably have it too
 
 ## How to set up for a new CS Games
 
