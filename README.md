@@ -37,7 +37,10 @@
    linear. I've left the function that I think we ended up using for the 2018
    CS Games (IIRC I actually generated several options and let whoever was
    in the major's lab at the time vote, and it was unanimous that this was
-   best)
+   best).
+
+If you want to constrain the number of categories per person, use MIN_CATS and
+MAX_CATS in ./cs.py. I have these set to what I used for the 2018 cs games.
 
 If you want to add more conditions (e.g. person X and person Y shouldn't be on
 the same team), that should be fairly easy to do in ./cs.py following the
